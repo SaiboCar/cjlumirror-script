@@ -10,7 +10,7 @@ docker run --name syncalpine --rm \
     -e RSYNC_MAXDELETE='10000' \
     -v /var/repos/alpine:/data \
     -v /var/sync-logs/alpine:/log \
-    ustcmirror/rsync:latest 'until /sync.sh; do :;done' &
+    ustcmirror/rsync:latest 'until entry.sh; do :;done' &
 ) &
 
 (

@@ -2,7 +2,7 @@
 mkdir -p /var/sync-logs/alpine /var/repos/alpine
 docker run --rm \
     -e LOG_ROTATE_CYCLE='5' \
-    -e RSYNC_HOST='rsync.alpinelinux.org' \
+    -e RSYNC_HOST='rsync.mirrors.ustc.edu.cn' \
     -e RSYNC_PATH='alpine/' \
     -e RSYNC_MAXDELETE='10000' \
     -v /var/repos/alpine:/data \

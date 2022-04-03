@@ -1,0 +1,10 @@
+[Unit]
+Description=cjlumirror
+Wants=cjlumirror.timer
+
+[Service]
+Type=oneshot
+ExecStart=/home/user/cjlumirror-script/hourly.sh
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,10 @@
+[Unit]
+Description=cjlumirror
+Requires=cjlumirror.service
+
+[Timer]
+Unit=cjlumirror.service
+OnCalendar=*-*-* *:*:00
+
+[Install]
+WantedBy=timers.target

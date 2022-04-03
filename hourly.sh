@@ -8,7 +8,7 @@ docker run --name syncalpine --rm \
     -e RSYNC_MAXDELETE='10000' \
     -v /var/repos/alpine:/data \
     -v /var/sync-logs/alpine:/log \
-    ustcmirror/rsync:latest &
+    ustcmirror/rsync:latest 'until /sync.sh; do :;done'&
 
 mkdir -p /var/repos/ubuntu
 rm -fr /var/repos/ubuntu/ubuntu

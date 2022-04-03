@@ -3,7 +3,7 @@
 mkdir -p /var/sync-logs/alpine /var/repos/alpine
 docker stop syncalpine
 sleep 1
-docker run --name syncalpine --rm \
+docker run -d --name syncalpine --rm \
     -e LOG_ROTATE_CYCLE='5' \
     -e RSYNC_HOST='rsync.mirrors.ustc.edu.cn' \
     -e RSYNC_PATH='alpine/' \
@@ -19,11 +19,13 @@ rm -fr /var/repos/ubuntu/ubuntu
 ln -s .. /var/repos/ubuntu/ubuntu
 docker stop syncubuntu
 sleep 1
-docker run --name syncubuntu --rm \
+docker run -d --name syncubuntu --rm \
     -e APTSYNC_URL='http://mirrors.zju.edu.cn/ubuntu/' \
     -e APTSYNC_UNLINK=1 \
     -e APTSYNC_DISTS='bionic,focal|main multiverse restricted universe|amd64|/' \
     -v /var/repos/ubuntu:/data \
     -v /var/sync-logs/ubuntu:/log \
-    ustcmirror/apt-sync:latest &
+    ustcmirror/apt-sync:latest
 ) &
+
+wait

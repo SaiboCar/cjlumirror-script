@@ -1,6 +1,8 @@
 #!/usr/bin/sudo /bin/sh
+(
 mkdir -p /var/sync-logs/alpine /var/repos/alpine
 docker stop syncalpine
+wait 1
 docker run --name syncalpine --rm \
     -e LOG_ROTATE_CYCLE='5' \
     -e RSYNC_HOST='rsync.mirrors.ustc.edu.cn' \
@@ -9,7 +11,9 @@ docker run --name syncalpine --rm \
     -v /var/repos/alpine:/data \
     -v /var/sync-logs/alpine:/log \
     ustcmirror/rsync:latest 'until /sync.sh; do :;done' &
+) &
 
+(
 mkdir -p /var/repos/ubuntu /var/sync-logs/ubuntu
 rm -fr /var/repos/ubuntu/ubuntu
 ln -s .. /var/repos/ubuntu/ubuntu
@@ -21,3 +25,4 @@ docker run --name syncubuntu --rm \
     -v /var/repos/ubuntu:/data \
     -v /var/sync-logs/ubuntu:/log \
     ustcmirror/apt-sync:latest &
+) &

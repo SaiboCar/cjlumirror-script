@@ -17,7 +17,7 @@ docker stop syncubuntu
 docker run --name syncubuntu --rm \
     -e APTSYNC_URL='http://mirrors.zju.edu.cn/ubuntu/' \
     -e APTSYNC_UNLINK=1 \
-    -e APTSYNC_DISTS='bionic focal|main multiverse restricted universe|amd64|/' \
+    -e APTSYNC_DISTS='bionic,focal|main multiverse restricted universe|amd64|/' \
     -v /var/repos/ubuntu:/data \
     -v /var/sync-logs/ubuntu:/log \
     ustcmirror/apt-sync:latest &

@@ -13,6 +13,6 @@ mkdir -p /var/repos/ubuntu
 docker run --rm \
     -e APTSYNC_URL='http://mirrors.ustc.edu.cn/ubuntu/' \
     -e APTSYNC_UNLINK=1 \
-    -e APTSYNC_DISTS='ubuntu-lts|main multiverse restricted universe|amd64|/data' \
+    -e APTSYNC_DISTS='bionic focal|main multiverse restricted universe|amd64|/data' \
     -v /var/repos/ubuntu:/data \
     ustcmirror/apt-sync:latest &

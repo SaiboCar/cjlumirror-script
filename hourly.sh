@@ -2,7 +2,7 @@
 (
 mkdir -p /var/sync-logs/alpine /var/repos/alpine
 docker stop syncalpine
-sleep 5
+sleep 1
 docker run -d --name syncalpine --rm \
     -e LOG_ROTATE_CYCLE='5' \
     -e RSYNC_HOST='rsync.mirrors.ustc.edu.cn' \
@@ -18,7 +18,7 @@ mkdir -p /var/repos/ubuntu /var/sync-logs/ubuntu
 rm -fr /var/repos/ubuntu/ubuntu
 ln -s .. /var/repos/ubuntu/ubuntu
 docker stop syncubuntu
-sleep 5
+sleep 1
 docker run -d --name syncubuntu --rm \
     -e APTSYNC_URL='http://mirrors.zju.edu.cn/ubuntu/' \
     -e APTSYNC_UNLINK=1 \
@@ -26,6 +26,22 @@ docker run -d --name syncubuntu --rm \
     -v /var/repos/ubuntu:/data \
     -v /var/sync-logs/ubuntu:/log \
     ustcmirror/apt-sync:latest
+) &
+
+(
+mkdir -p /var/sync-logs/archlinux /var/repos/archlinux
+docker stop syncarch
+sleep 1
+docker run -d --name syncarch --rm \
+    -e LOG_ROTATE_CYCLE='5' \
+    -e RSYNC_HOST='rsync.mirrors.ustc.edu.cn' \
+    -e RSYNC_PATH='archlinux/' \
+    -e RSYNC_MAXDELETE='10000' \
+    -e RSYNC_DELAY_UPDATES=true \
+    -e RSYNC_DELETE_DELAY=true \
+    -v /var/repos/archlinux:/data \
+    -v /var/sync-logs/archlinux:/log \
+    --entrypoint /bin/bash ustcmirror/rsync:latest -c 'until entry.sh; do :;done'
 ) &
 
 wait

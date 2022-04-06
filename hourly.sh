@@ -34,7 +34,7 @@ docker stop syncarch
 sleep 1
 docker run -d --name syncarch --rm \
     -e LOG_ROTATE_CYCLE='5' \
-    -e RSYNC_HOST='rsync.mirrors.ustc.edu.cn' \
+    -e RSYNC_HOST='mirrors.tuna.tsinghua.edu.cn' \
     -e RSYNC_PATH='archlinux/' \
     -e RSYNC_MAXDELETE='10000' \
     -e RSYNC_DELAY_UPDATES=true \

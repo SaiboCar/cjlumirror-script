@@ -21,7 +21,7 @@ docker stop syncubuntu
 sleep 1
 docker run -d --name syncubuntu --rm \
     -e APTSYNC_URL='http://mirrors.tuna.tsinghua.edu.cn/ubuntu/' \
-    -e APTSYNC_DISTS='bionic,focal|main multiverse restricted universe|amd64' \
+    -e APTSYNC_DISTS='bionic focal|main multiverse restricted universe|amd64' \
     -v /var/repos/ubuntu:/data \
     -v /var/sync-logs/ubuntu:/log \
     ustcmirror/aptsync:latest

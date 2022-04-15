@@ -16,7 +16,7 @@ docker run -d --name syncalpine --rm \
 (
 mkdir -p /var/repos/ubuntu /var/sync-logs/ubuntu
 rm -fr /var/repos/ubuntu/ubuntu
-ln -s .. /var/repos/ubuntu/ubuntu
+ln -s . /var/repos/ubuntu/ubuntu
 docker stop syncubuntu
 sleep 1
 docker run -d --name syncubuntu --rm \
